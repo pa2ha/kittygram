@@ -4,8 +4,6 @@ volumes:
   pg_data:
   STATIC:
   MEDIA:
-  static:
-  media:
 
 services:
   db:
@@ -18,13 +16,13 @@ services:
     env_file: .env
     volumes:
       - STATIC:/backend_static
-      - MEDIA:/media/
+      - MEDIA:/app/media/
   frontend:
     env_file: .env
     image: pa2ha/kittigram_frontend
-    command: cp -r /app/build/. /frontend_static/
+    command: cp -r /app/build/. /static/
     volumes:
-      - STATIC:/frontend_static
+      - STATIC:/static
   gateway:
     image: pa2ha/kittygram_ngnix
     env_file: .env
@@ -33,6 +31,3 @@ services:
     volumes:
       - STATIC:/staticfiles/
       - MEDIA:/media/
-    depends_on:
-      - backend
-
