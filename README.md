@@ -142,4 +142,8 @@
 Python 3.11.1,
 Django 3.2.3,
 djangorestframework==3.12.4, 
+<<<<<<< HEAD
 PostgreSQL 13
+=======
+PostgreSQL 13
+>>>>>>> a4d720f0f1284ed49e23a6741767ea8df97a44c6
