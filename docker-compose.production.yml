@@ -9,11 +9,13 @@ services:
   db:
     image: postgres:13
     env_file: .env
+    restart: on-failure
     volumes:
       - pg_data:/var/lib/postgresql/data
   backend:
     image: pa2ha/kittigram_backend
     env_file: .env
+    restart: on-failure
     volumes:
       - STATIC:/backend_static
       - MEDIA:/app/media/
@@ -21,13 +23,15 @@ services:
     env_file: .env
     image: pa2ha/kittigram_frontend
     command: cp -r /app/build/. /static/
+    restart: no
     volumes:
       - STATIC:/static
   gateway:
     image: pa2ha/kittygram_ngnix
     env_file: .env
     ports:
-      - 9000:80
+      - "${EXTERNAL_PORT}:80"
+    restart: on-failure
     volumes:
       - STATIC:/staticfiles/
       - MEDIA:/media/
